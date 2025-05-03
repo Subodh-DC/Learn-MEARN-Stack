@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Auth Forms - Login / Signup / Forgot Password</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #74ebd5, #acb6e5);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+      transition: all 0.4s ease;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    input {
+      margin-bottom: 1rem;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      transition: border-color 0.3s;
+    }
+    input:focus {
+      border-color: #6a11cb;
+      outline: none;
+    }
+    button {
+      padding: 0.8rem;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: linear-gradient(to right, #2575fc, #6a11cb);
+    }
+    .toggle-link {
+      text-align: center;
+      margin-top: 1rem;
+      color: #555;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .toggle-link:hover {
+      color: #2575fc;
+      text-decoration: underline;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- Login Form -->
+  <form id="login-form" class="hidden" action="/profile" method="post">
+    <h2>Login</h2>
+    <input type="email" name="emailid" id="login-email" placeholder="Email" required>
+    <input type="password" name="password" id="login-password" placeholder="Password" required>
+    <button type="submit">Login</button>
+    <div class="toggle-link" onclick="showForm('signup')">Don't have an account? Sign up</div>
+    <div class="toggle-link" onclick="showForm('forgot')">Forgot Password?</div>
+  </form>
+
+  <!-- Signup Form -->
+  <form id="signup-form" action="/profile" method="post">
+    <h2>Sign Up</h2>
+    <input type="text" name="name" id="signup-name" placeholder="Full Name" required>
+    <input type="email" name="emailid" id="signup-email" placeholder="Email" required>
+    <input type="password" name="password" id="signup-password" placeholder="Password" required>
+    <button type="submit">Sign Up</button>
+    <div class="toggle-link" onclick="showForm('login')">Already have an account? Login</div>
+  </form>
+
+  <!-- Forgot Password Form -->
+  <form id="forgot-form" class="hidden">
+    <h2>Forgot Password</h2>
+    <input type="email" id="forgot-email" placeholder="Enter your Email" required>
+    <button type="submit">Reset Password</button>
+    <div class="toggle-link" onclick="showForm('login')">Back to Login</div>
+  </form>
+
+</div>
+
+<script>
+  function showForm(formType) {
+    document.getElementById('login-form').classList.add('hidden');
+    document.getElementById('signup-form').classList.add('hidden');
+    document.getElementById('forgot-form').classList.add('hidden');
+
+    if (formType === 'login') {
+      document.getElementById('login-form').classList.remove('hidden');
+    } else if (formType === 'signup') {
+      document.getElementById('signup-form').classList.remove('hidden');
+    } else if (formType === 'forgot') {
+      document.getElementById('forgot-form').classList.remove('hidden');
+    }
+  }
+
+  // Simple Form Submission (Demo Purpose)
+  // document.getElementById('login-form').addEventListener('submit', function(e) {
+  //   e.preventDefault();
+  //   alert('Login form submitted!');
+  // });
+  
+  // document.getElementById('signup-form').addEventListener('submit', function(e) {
+  //   e.preventDefault();
+  //   alert('Signup form submitted!');
+  // });
+
+  document.getElementById('forgot-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Password reset link sent to your email!');
+  });
+</script>
+
+</body>
+</html>
